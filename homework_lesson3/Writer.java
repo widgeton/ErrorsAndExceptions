@@ -11,8 +11,8 @@ public class Writer {
     }
 
     public void writeInCsv() {
-        try (FileWriter fileWriter = new FileWriter("%s.csv".formatted(getSecondName()))) {
-            fileWriter.write(person.toString());
+        try (FileWriter fileWriter = new FileWriter("%s.csv".formatted(getSecondName()), true)) {
+            fileWriter.write(person.toString() + "\n");
             person.getOutput().successfulRecording();
         } catch (IOException ex) {
             person.getOutput().failedRecording();

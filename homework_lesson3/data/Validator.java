@@ -1,6 +1,6 @@
 package data;
 
-import java.util.List;
+import java.time.Year;
 
 public class Validator {
     public boolean isNameValid(String input) {
@@ -24,16 +24,15 @@ public class Validator {
         }
         if (nums[0] > 31 || nums[0] < 0) return false;
         if (nums[1] > 12 || nums[1] < 0) return false;
-        if (nums[2] > 2023 || nums[2] < 0) return false;
-        return true;
+        return nums[2] <= Year.now().getValue() && nums[2] >= 0;
     }
 
     public boolean isPhoneNumberValid(String input) {
-        if (input.length() != 15) return false;
-        String[] array = input.split("-");
+        if (input.length() != 11) return false;
+        String[] array = input.split("(?!^)");
         for (String symbol : array) {
             try {
-                int n = Integer.parseInt(symbol);
+                Integer.parseInt(symbol);
             } catch (NumberFormatException ex) {
                 return false;
             }
@@ -42,7 +41,6 @@ public class Validator {
     }
 
     public boolean isGenderValid(String input) {
-        if (input.equals("f") || input.equals("m")) return true;
-        return false;
+        return input.equals("f") || input.equals("m");
     }
 }
